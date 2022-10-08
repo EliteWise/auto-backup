@@ -16,14 +16,15 @@ $main_form.AutoSize = $false
 
 #begin to draw list box
 $ListBox = New-Object System.Windows.Forms.ListBox
-$ListBox.Location = New-Object System.Drawing.Size(400,80)
-$ListBox.Size = New-Object System.Drawing.Size(160,20)
-$ListBox.Height = 80
+$ListBox.Location = New-Object System.Drawing.Size(200,100)
+$ListBox.Size = New-Object System.Drawing.Size(250,100)
+$ListBox.Height = 120
 $ListBox.Name = 'ListBox_UserName'
 $main_form.Controls.Add($ListBox)
 
 $AddButton = New-Object System.Windows.Forms.Button
 $CheckButton = New-Object System.Windows.Forms.Button
+$RemoveButton = New-Object System.Windows.Forms.Button
 
 function createButton($text, $locX, $locY, $Button) {
 
@@ -38,6 +39,7 @@ function createButton($text, $locX, $locY, $Button) {
 
 createButton "Add File/Folder" 400 10 $AddButton
 createButton "Check File/Folder" 400 50 $CheckButton
+createButton "Remove Path" 400 30 $RemoveButton
 
 $AddButton.Add_Click({
 
@@ -51,6 +53,10 @@ $AddButton.Add_Click({
 
 $CheckButton.Add_Click({
     'one','two','three','four' | Out-GridView -OutputMode Single
+})
+
+$RemoveButton.Add_Click({
+    $ListBox.Items.RemoveAt($ListBox.SelectedIndex)
 })
 
 $main_form.ShowDialog()
